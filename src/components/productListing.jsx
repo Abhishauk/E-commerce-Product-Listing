@@ -3,9 +3,11 @@ import "./product.css";
 import Navbar from "./navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/reducer";
+import { useNavigate } from "react-router-dom";
 
 const ProductListing = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cart = useSelector(state => state.cart.cart);
   const [products, setProducts] = useState([]);
 
@@ -36,6 +38,7 @@ const ProductListing = () => {
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
     console.log("Cart after dispatch:", cart); 
+    navigate('/cart')
   };
 
   return (
