@@ -3,11 +3,9 @@ import "./product.css";
 import Navbar from "./navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/reducer";
-import { useNavigate } from "react-router-dom";
 
 const ProductListing = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const cart = useSelector(state => state.cart.cart);
   const [products, setProducts] = useState([]);
 
@@ -23,7 +21,12 @@ const ProductListing = () => {
         const data = await response.json();
         console.log("API Response:", data);
         if (Array.isArray(data.products)) {
-          setProducts(data.products);
+          setProducts(
+            data.products.map(product => ({
+              ...product,
+              addedToCart: false 
+            }))
+          );
         } else {
           throw new Error("API response does not contain an array of products");
         }
@@ -35,10 +38,11 @@ const ProductListing = () => {
     fetchData();
   }, []);
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = product => {
     dispatch(addToCart(product));
-    console.log("Cart after dispatch:", cart); 
-    navigate('/cart')
+    setProducts(
+      products.map(p => (p.id === product.id ? { ...p, addedToCart: true } : p))
+    );
   };
 
   return (
@@ -62,11 +66,11 @@ const ProductListing = () => {
               <p className="product-desc">
                 {product.description}
               </p>
-              <button 
-                className="add-to-cart" 
+              <button
+                className="add-to-cart"
                 onClick={() => handleAddToCart(product)}
               >
-                Add to Cart
+                {product.addedToCart ? "Added" : "Add to Cart"}
               </button>
             </div>
           </div>

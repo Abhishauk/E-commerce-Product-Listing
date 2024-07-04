@@ -12,6 +12,10 @@ const Cart = () => {
     dispatch(removeFromCart(productId));
   };
 
+  const calculateTotalPrice = () => {
+    return cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+  };
+
   return (
     <div className="cart-page">
       <h2>Your Cart</h2>
@@ -29,6 +33,9 @@ const Cart = () => {
               </div>
             </div>
           ))}
+          <div className="cart-total">
+            <h3>Total Price: ₹{calculateTotalPrice()}</h3>
+          </div>
         </div>
       )}
     </div>
