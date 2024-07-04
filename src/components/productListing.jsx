@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./product.css";
-import Navbar from "./navbar";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/reducer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +8,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const ProductListing = () => {
   const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
-  const [sortByPrice, setSortByPrice] = useState(null); // null, 'low', or 'high'
+  const [sortByPrice, setSortByPrice] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -44,9 +43,7 @@ const ProductListing = () => {
   const handleAddToCart = product => {
     dispatch(addToCart(product));
     setProducts(
-      products.map(p =>
-        p.id === product.id ? { ...p, addedToCart: true } : p
-      )
+      products.map(p => (p.id === product.id ? { ...p, addedToCart: true } : p))
     );
   };
 
@@ -72,7 +69,6 @@ const ProductListing = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="product-filters">
         <div className="sorted">
           <label>
@@ -94,17 +90,26 @@ const ProductListing = () => {
         </div>
       </div>
       <div className="product-listing">
-        {filteredProducts.map(product => (
+        {filteredProducts.map(product =>
           <div key={product.id} className="product-card">
-            <img
-              src={product.images[0]}
-              alt={product.title}
-              className="product-image"
-            />
+            <div className="product-image-container">
+              <img
+                src={product.images[0]}
+                alt={product.title}
+                className="product-image"
+              />
+            </div>
+
             <div className="product-info">
-              <h3 className="product-name">{product.title}</h3>
-              <p className="product-price">₹{product.price}</p>
-              <p className="product-desc">{product.description}</p>
+              <h3 className="product-name">
+                {product.title}
+              </h3>
+              <p className="product-price">
+                ₹{product.price}
+              </p>
+              <p className="product-desc">
+                {product.description}
+              </p>
               <button
                 className="add-to-cart"
                 onClick={() => handleAddToCart(product)}
@@ -113,7 +118,7 @@ const ProductListing = () => {
               </button>
             </div>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

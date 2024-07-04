@@ -1,11 +1,19 @@
-import React from 'react'
+import React from "react";
+import ProductListing from "../components/productListing";
+import Navbar from "../components/navbar";
+import './productPage.css';
 
-const productListPage = () => {
+
+const ProductListPage = () => {
   return (
     <div>
-      
-    </div>
-  )
-}
+      <Navbar />
 
-export default productListPage
+      <div className="product-list-page">
+        <ProductListing />
+      </div>
+    </div>
+  );
+};
+
+export default ProductListPage;

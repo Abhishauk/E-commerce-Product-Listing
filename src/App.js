@@ -1,16 +1,15 @@
 import './App.css';
 import { BrowserRouter as Router , Routes , Route } from 'react-router-dom';
-import Navbar from './components/navbar';
-import ProductListing from './components/productListing';
-import Cart from './components/cart';
+import ProductListPage from './pages/productListPage';
+import CartPage from './pages/cartPage';
 function App() {
   return (
     <Router>
     <div className="App">
       <Routes>
-        <Route path='/' element = { < Navbar />}/>
-        <Route path='/ProductListing' element = { < ProductListing />}/>
-        <Route path='/cart' element = { < Cart />}/>
+        <Route path='/' element = { < ProductListPage/>}/>
+        <Route path='/ProductListing' element = { < ProductListPage />}/>
+        <Route path='/cart' element = { < CartPage />}/>
 
       </Routes>
       
@@ -19,4 +18,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;
