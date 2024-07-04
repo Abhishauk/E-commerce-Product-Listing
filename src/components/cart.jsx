@@ -1,7 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { removeFromCart } from '../redux/reducer'; 
 import './cart.css';
+import Navbar from "./navbar";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -17,27 +20,37 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart-page">
-      <h2>Your Cart</h2>
-      {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <div className="cart-items">
-          {cart.map(item => (
-            <div key={item.id} className="cart-item">
-              <img src={item.images[0]} alt={item.title} className="cart-item-image" />
-              <div className="cart-item-info">
-                <h3>{item.title}</h3>
-                <p>Price: ₹{item.price}</p>
-                <button onClick={() => handleRemoveFromCart(item.id)}>Remove</button>
+    <div>
+      <Navbar />
+      <div className="cart-page">
+        {cart.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          <div className="cart-items">
+            {cart.map(item => (
+              <div key={item.id} className="cart-item">
+                <img src={item.images[0]} alt={item.title} className="cart-item-image" />
+                <div className="cart-item-info">
+                  <h3>{item.title}</h3>
+                  <p>₹{item.price}</p>
+                </div>
+                <div className='cart-icon'>
+                <FontAwesomeIcon 
+                  icon={faTimes} 
+                  className="remove-icon" 
+                  onClick={() => handleRemoveFromCart(item.id)} 
+                />
+                  </div>
+                
               </div>
+            ))}
+            <div className="cart-total">
+              <h4>Total Price:</h4>
+              <p>₹{calculateTotalPrice()}</p>
             </div>
-          ))}
-          <div className="cart-total">
-            <h3>Total Price: ₹{calculateTotalPrice()}</h3>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

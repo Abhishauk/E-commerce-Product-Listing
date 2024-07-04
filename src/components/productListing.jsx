@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./product.css";
 import Navbar from "./navbar";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/reducer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const ProductListing = () => {
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart.cart);
   const [products, setProducts] = useState([]);
+  const [sortByPrice, setSortByPrice] = useState(null); // null, 'low', or 'high'
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +27,7 @@ const ProductListing = () => {
           setProducts(
             data.products.map(product => ({
               ...product,
-              addedToCart: false 
+              addedToCart: false
             }))
           );
         } else {
@@ -41,15 +44,57 @@ const ProductListing = () => {
   const handleAddToCart = product => {
     dispatch(addToCart(product));
     setProducts(
-      products.map(p => (p.id === product.id ? { ...p, addedToCart: true } : p))
+      products.map(p =>
+        p.id === product.id ? { ...p, addedToCart: true } : p
+      )
     );
   };
+
+  const handleSortChange = event => {
+    const value = event.target.value;
+    setSortByPrice(value);
+    let sortedProducts = [...products];
+    if (value === "low") {
+      sortedProducts.sort((a, b) => a.price - b.price);
+    } else if (value === "high") {
+      sortedProducts.sort((a, b) => b.price - a.price);
+    }
+    setProducts(sortedProducts);
+  };
+
+  const handleSearchChange = event => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredProducts = products.filter(product =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
       <Navbar />
+      <div className="product-filters">
+        <div className="sorted">
+          <label>
+            <select value={sortByPrice} onChange={handleSortChange}>
+              <option value="">Select</option>
+              <option value="low">Low to High</option>
+              <option value="high">High to Low</option>
+            </select>
+          </label>
+        </div>
+        <div className="search">
+          <FontAwesomeIcon icon={faSearch} className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+        </div>
+      </div>
       <div className="product-listing">
-        {products.map(product =>
+        {filteredProducts.map(product => (
           <div key={product.id} className="product-card">
             <img
               src={product.images[0]}
@@ -57,15 +102,9 @@ const ProductListing = () => {
               className="product-image"
             />
             <div className="product-info">
-              <h3 className="product-name">
-                {product.title}
-              </h3>
-              <p className="product-price">
-                ₹{product.price}
-              </p>
-              <p className="product-desc">
-                {product.description}
-              </p>
+              <h3 className="product-name">{product.title}</h3>
+              <p className="product-price">₹{product.price}</p>
+              <p className="product-desc">{product.description}</p>
               <button
                 className="add-to-cart"
                 onClick={() => handleAddToCart(product)}
@@ -74,7 +113,7 @@ const ProductListing = () => {
               </button>
             </div>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );

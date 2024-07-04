@@ -26,6 +26,7 @@ body {
   overflow: hidden; 
   display: flex;
   flex-direction: column;
+  
 }
 
 .product-card:hover {
@@ -33,53 +34,124 @@ body {
 }
 
 .product-image {
-  width: 80%;
-  height: 50%;
+  width: 100px;
+  height: 150px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  object-fit: cover;
 }
 
 .product-info {
-  padding: 10px;
-  text-align: center;
+  padding: 5px;
+  /* text-align: center; */
   flex-grow: 1;
 }
 
 .product-name {
   font-size: 5px; 
-  margin: 10px 0;
+  display: flex;
 }
 
 .product-price {
   color: #888;
   font-size: 5px; 
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  display: flex;
 }
 
 .product-desc {
-  font-size: 5px; 
+  font-size: 4px;
+  display: flex; 
 }
 
 .add-to-cart {
   
-  align-items: center;
+  /* align-items: center; */
+  display: flex;
   background-color: #000000;
   color: white;
   border: none;
-  padding: 7px;
+  padding: 5px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-size: 5px;
+  font-size: 4px;
 }
 
 .add-to-cart:hover {
-  background-color: #0056b3;
+  background-color: #77808a;
 }
+
+.product-filters {
+  margin: 20px 0;
+  display: flex;
+  justify-content: right;
+
+}
+
+.sorted label {
+  font-size: 10px;
+  margin-left: 10px;
+}
+
+.sorted select {
+  font-size: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+.sorted option {
+  font-size: 7px;
+}
+/* CSS for search icon */
+
+.search {
+  position: relative;
+}
+
+.search input[type="text"] {
+  padding: 7px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 8px;
+  width: 100px; 
+  padding-right: 30px; 
+}
+
+.search input[type="text"]:hover {
+  border: 1px solid #ddd; 
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px; 
+  transform: translateY(-50%);
+  color: #888; 
+  cursor: pointer;
+}
+
+
+
 
 @media (max-width: 480px) {
   .product-card {
     width: calc(100% - 20px); 
-    max-width: none; 
+    
+  }
+  .product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    transition: transform 0.2s;
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    
   }
 }

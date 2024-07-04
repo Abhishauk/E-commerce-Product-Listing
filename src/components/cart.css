@@ -1,55 +1,119 @@
+/* Overall cart page */
 .cart-page {
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  overflow: hidden;
 }
 
+/* Cart container */
 .cart-items {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 15px;
+  padding: 20px; 
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden; 
+  box-sizing: border-box; 
 }
 
+/* Individual cart item */
 .cart-item {
   display: flex;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden; 
+  box-sizing: border-box; 
 }
 
+/* Image styling */
 .cart-item-image {
-  width: 100px;
-  height: 100px;
+  max-width: 60px; 
+  max-height: 60px; 
   object-fit: cover;
   margin-right: 10px;
+  border-radius: 4px;
 }
 
+/* Info container */
 .cart-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   flex: 1;
+  overflow: hidden; 
 }
 
+/* Product title */
+.cart-item-info h3 {
+  font-size: 10px; 
+  margin: 0 0 5px 0;
+  color: #333;
+  font-weight: 600;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+}
+
+/* Product details */
+.cart-item-info p {
+  font-size: 10px; 
+  margin: 0;
+  color: #666;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+}
+
+/* Quantity controls */
 .quantity-controls {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
+/* Quantity buttons */
 .quantity-controls button {
-  padding: 5px 10px;
-  background-color: #000000;
+  padding: 3px 6px; 
   color: #fff;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  border-radius: 4px;
+  font-size: 10px; 
 }
 
 .quantity-controls button:hover {
-  background-color: #000000;
+  background-color: #333;
 }
 
+/* Quantity display */
 .quantity-controls span {
-  margin: 0 10px;
-  font-size: 18px;
+  margin: 0 5px;
+  font-size: 12px; 
 }
 
-.cart-total {
+/* Total price */
+.cart-total h4 {
   margin-top: 20px;
   text-align: right;
+  font-size: 9px; 
+  
+}
+.cart-total p {
+  font-size: 8px;
+  font-weight: bold;
+  color: #333;
+  text-align: right;
+}
+.cart-icon {
+  cursor: pointer;
 }
