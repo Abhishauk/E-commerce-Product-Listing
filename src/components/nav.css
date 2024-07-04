@@ -47,54 +47,6 @@
   
 
 
-/* Global Styles */
-body {
-  font-family: Arial, sans-serif;
-}
-
-/* ProductListing Component Styles */
-.product-listing {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 10px;
-}
-
-.product-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 10px;
-  width: 45%;
-  transition: transform 0.2s;
-}
-
-.product-card:hover {
-  transform: scale(1.05);
-}
-
-.product-image {
-  width: 100%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.product-info {
-  padding: 10px;
-  text-align: center;
-}
-
-.product-name {
-  font-size: 1.2em;
-  margin: 10px 0;
-}
-
-.product-price {
-  color: #888;
-  font-size: 1em;
-}
-
 
 
 
